@@ -1,7 +1,10 @@
 from collections import Counter
 
 
-def parse_input(input_str):
+def parse_input(input_file):
+    with open(input_file) as f:
+        input_str = f.read()
+
     left_list = []
     right_list = []
     for line in input_str.split("\n"):
@@ -22,10 +25,6 @@ def calculate_similarity_score(left_list, right_list):
     return similarity_score
 
 
-with open("./input/input_day1.txt") as f:
-    input_str = f.read()
-
-left_list, right_list = parse_input(input_str)
-
+left_list, right_list = parse_input("./input/day1.txt")
 result = calculate_similarity_score(left_list, right_list)
 print("Similarity Score:", result)

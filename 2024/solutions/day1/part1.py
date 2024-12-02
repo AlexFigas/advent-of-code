@@ -10,7 +10,10 @@ def calculate_total_distance(left_list, right_list):
     return total_distance
 
 
-def parse_input(input_str):
+def parse_input(input_file):
+    with open(input_file) as f:
+        input_str = f.read()
+
     left_list = []
     right_list = []
     for line in input_str.split("\n"):
@@ -22,12 +25,6 @@ def parse_input(input_str):
     return left_list, right_list
 
 
-# Read the input
-with open("./input/input_day1.txt") as f:
-    input_str = f.read()
-
-left_list, right_list = parse_input(input_str)
-
-# Calculate the total distance
+left_list, right_list = parse_input("./input/day1.txt")
 result = calculate_total_distance(left_list, right_list)
 print("Total Distance:", result)
