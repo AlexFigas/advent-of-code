@@ -36,6 +36,7 @@ def count_safe_reports_with_dampener(reports):
     return count
 
 
-reports = parse_input("./input/day2.txt")
-safe_count = count_safe_reports_with_dampener(reports)
-print("Number of safe reports with dampener:", safe_count)
+if __name__ == "__main__":
+    reports = parse_input("./input/day2.txt")
+    safe_count = count_safe_reports_with_dampener(reports)
+    print("Number of safe reports with dampener:", safe_count)

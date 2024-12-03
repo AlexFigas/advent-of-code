@@ -23,6 +23,7 @@ def parse_input(file_path):
     return reports
 
 
-reports = parse_input("./input/day2.txt")
-safe_count = count_safe_reports(reports)
-print("Number of safe reports:", safe_count)
+if __name__ == "__main__":
+    reports = parse_input("./input/day2.txt")
+    safe_count = count_safe_reports(reports)
+    print("Number of safe reports:", safe_count)
