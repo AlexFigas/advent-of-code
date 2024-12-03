@@ -25,6 +25,7 @@ def calculate_similarity_score(left_list, right_list):
     return similarity_score
 
 
-left_list, right_list = parse_input("./input/day1.txt")
-result = calculate_similarity_score(left_list, right_list)
-print("Similarity Score:", result)
+if __name__ == "__main__":
+    left_list, right_list = parse_input("./input/day1.txt")
+    result = calculate_similarity_score(left_list, right_list)
+    print("Similarity Score:", result)

@@ -25,6 +25,7 @@ def parse_input(input_file):
     return left_list, right_list
 
 
-left_list, right_list = parse_input("./input/day1.txt")
-result = calculate_total_distance(left_list, right_list)
-print("Total Distance:", result)
+if __name__ == "__main__":
+    left_list, right_list = parse_input("./input/day1.txt")
+    result = calculate_total_distance(left_list, right_list)
+    print("Total Distance:", result)
