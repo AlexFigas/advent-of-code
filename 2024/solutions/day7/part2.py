@@ -34,11 +34,9 @@ def total_calibration_result(file_path):
     return total
 
 
-test_input_path = "input/day7_test.txt"
-full_input_path = "input/day7.txt"
+if __name__ == "__main__":
+    test_result = total_calibration_result("input/day7_test.txt")
+    full_result = total_calibration_result("input/day7.txt")
 
-test_result = total_calibration_result(test_input_path)
-full_result = total_calibration_result(full_input_path)
-
-print(f"Test Input Total Calibration Result (Part Two): {test_result}")
-print(f"Full Input Total Calibration Result (Part Two): {full_result}")
+    print(f"Test Input Total Calibration Result (Part Two): {test_result}")
+    print(f"Full Input Total Calibration Result (Part Two): {full_result}")
