@@ -9,7 +9,7 @@ def simulate_robots(input_data, width, height, seconds):
         px, py = map(int, position.split(","))
         vx, vy = map(int, velocity.split(","))
         robots.append(((px, py), (vx, vy)))
-    
+
     # Simulate robots' positions after `seconds` seconds
     final_positions = []
     for (px, py), (vx, vy) in robots:
@@ -17,7 +17,7 @@ def simulate_robots(input_data, width, height, seconds):
         final_x = (px + vx * seconds) % width
         final_y = (py + vy * seconds) % height
         final_positions.append((final_x, final_y))
-    
+
     # Divide the space into quadrants
     mid_x, mid_y = width // 2, height // 2
     quadrants = [0, 0, 0, 0]  # Top-left, Top-right, Bottom-left, Bottom-right
@@ -33,18 +33,19 @@ def simulate_robots(input_data, width, height, seconds):
             quadrants[2] += 1  # Bottom-left
         elif x >= mid_x and y >= mid_y:
             quadrants[3] += 1  # Bottom-right
-    
+
     # Calculate the safety factor by multiplying quadrant counts
     safety_factor = 1
     for count in quadrants:
         safety_factor *= count
-    
+
     return safety_factor
 
 
 def parse_input(file_path):
     with open(file_path, "r") as f:
         return f.read()
+
 
 if __name__ == "__main__":
     input_data = parse_input("input/day14.txt")
