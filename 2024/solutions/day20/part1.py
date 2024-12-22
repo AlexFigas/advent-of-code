@@ -1,53 +1,99 @@
-from collections import deque
-
 def parse_input(file_path):
-    with open(file_path, 'r') as file:
-        lines = file.read().splitlines()
-    racetrack = [list(line) for line in lines]
-    start, end = None, None
-    for y, row in enumerate(racetrack):
-        for x, char in enumerate(row):
-            if char == 'S':
-                start = (x, y)
-            elif char == 'E':
-                end = (x, y)
-    return racetrack, start, end
+    with open(file_path, "r") as file:
+        codes = file.read().strip().split("\n")
+    return codes
 
-def bfs_shortest_path(racetrack, start):
-    rows, cols = len(racetrack), len(racetrack[0])
-    directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
-    queue = deque([(start[0], start[1], 0)])  # (x, y, distance)
-    distances = {}
+
+# Define the keypads
+numeric_keypad = [["7", "8", "9"], ["4", "5", "6"], ["1", "2", "3"], [None, "0", "A"]]
+
+directional_keypad = [[None, "^", "A"], ["<", "v", ">"]]
+
+# Define the movements
+movements = {"^": (-1, 0), "v": (1, 0), "<": (0, -1), ">": (0, 1)}
+
+
+def find_position(keypad, target):
+    for i, row in enumerate(keypad):
+        for j, key in enumerate(row):
+            if key == target:
+                return (i, j)
+    return None
+
+
+def bfs(start, goal, keypad):
+    from collections import deque
+
+    queue = deque([(start, "")])
+    visited = set()
+    visited.add(start)
 
     while queue:
-        x, y, dist = queue.popleft()
-        if (x, y) in distances:
-            continue
-        distances[(x, y)] = dist
+        (current_pos, path) = queue.popleft()
+        if current_pos == goal:
+            return path
 
-        for dx, dy in directions:
-            nx, ny = x + dx, y + dy
-            if 0 <= nx < cols and 0 <= ny < rows and racetrack[ny][nx] != '#' and (nx, ny) not in distances:
-                queue.append((nx, ny, dist + 1))
+        for move, (di, dj) in movements.items():
+            ni, nj = current_pos[0] + di, current_pos[1] + dj
+            if (
+                0 <= ni < len(keypad)
+                and 0 <= nj < len(keypad[0])
+                and keypad[ni][nj] is not None
+            ):
+                next_pos = (ni, nj)
+                if next_pos not in visited:
+                    visited.add(next_pos)
+                    queue.append((next_pos, path + move))
+    return None
 
-    return distances
 
-def count_cheats_saving_at_least(racetrack, start, end, min_saving):
-    from_start = bfs_shortest_path(racetrack, start)
-    from_end = bfs_shortest_path(racetrack, end)
+def get_shortest_sequence(code):
+    sequence = ""
+    current_pos = find_position(numeric_keypad, "A")
 
-    target_distance = from_start.get(end, float('inf')) - min_saving
-    count = 0
+    for char in code:
+        target_pos = find_position(numeric_keypad, char)
+        path = bfs(current_pos, target_pos, numeric_keypad)
+        sequence += path + "A"
+        current_pos = target_pos
 
-    for (x1, y1), start_dist in from_start.items():
-        for (x2, y2), end_dist in from_end.items():
-            manhattan_dist = abs(x2 - x1) + abs(y2 - y1)
-            if manhattan_dist <= 2 and start_dist + manhattan_dist + end_dist <= target_distance:
-                count += 1
+    return sequence
 
-    return count
+
+def get_directional_sequence(sequence):
+    directional_sequence = ""
+    current_pos = find_position(directional_keypad, "A")
+
+    for char in sequence:
+        if char == "A":
+            directional_sequence += "A"
+        else:
+            target_pos = find_position(directional_keypad, char)
+            path = bfs(current_pos, target_pos, directional_keypad)
+            directional_sequence += path + "A"
+            current_pos = target_pos
+
+    return directional_sequence
+
+
+def calculate_complexity(sequence, code):
+    numeric_part = int(code[:-1])
+    return len(sequence) * numeric_part
+
+
+def main():
+    file_path = "input/day21.txt"
+    codes = parse_input(file_path)
+
+    total_complexity = 0
+    for code in codes:
+        numeric_sequence = get_shortest_sequence(code)
+        directional_sequence = get_directional_sequence(numeric_sequence)
+        complexity = calculate_complexity(directional_sequence, code)
+        total_complexity += complexity
+
+    print(total_complexity)
+
 
 if __name__ == "__main__":
-    racetrack, start, end = parse_input("input/day20.txt")
-    result = count_cheats_saving_at_least(racetrack, start, end, 100)
-    print(f"Number of cheats saving at least 100 picoseconds: {result}")
+    main()
