@@ -8,6 +8,7 @@ fn main() {
 
     match day {
         0 => days::day00::run(),
+        1 => days::day01::run(),
         _ => eprintln!("Usage: cargo run <day>"),
     }
 }
