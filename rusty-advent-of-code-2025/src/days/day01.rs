@@ -82,14 +82,14 @@ mod tests {
     use super::*;
 
     #[test]
-    fn example_part1() {
+    fn test_part1() {
         let example = read_test_input(1);
-        assert_eq!(part1(&example), 3);
+        assert_eq!(part1(example), 3);
     }
 
     #[test]
-    fn example_part2() {
+    fn test_part2() {
         let example = read_test_input(1);
-        assert_eq!(part2(&example), 6);
+        assert_eq!(part2(example), 6);
     }
 }

@@ -121,14 +121,14 @@ mod tests {
     use super::*;
 
     #[test]
-    fn example_part1() {
+    fn test_part1() {
         let example = read_test_input(2);
-        assert_eq!(part1(&example), 1227775554u128);
+        assert_eq!(part1(example), 1227775554u128);
     }
 
     #[test]
-    fn example_part2() {
+    fn test_part2() {
         let example = read_test_input(2);
-        assert_eq!(part2(&example), 4174379265u128);
+        assert_eq!(part2(example), 4174379265u128);
     }
 }
