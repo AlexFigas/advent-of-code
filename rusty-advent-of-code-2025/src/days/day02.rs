@@ -1,4 +1,4 @@
-use crate::utils::read_input;
+use crate::utils::*;
 use std::collections::HashSet;
 
 pub fn run() {
@@ -123,12 +123,12 @@ mod tests {
     #[test]
     fn test_part1() {
         let example = read_test_input(2);
-        assert_eq!(part1(example), 1227775554u128);
+        assert_eq!(part1(&example), 1227775554u128);
     }
 
     #[test]
     fn test_part2() {
         let example = read_test_input(2);
-        assert_eq!(part2(example), 4174379265u128);
+        assert_eq!(part2(&example), 4174379265u128);
     }
 }

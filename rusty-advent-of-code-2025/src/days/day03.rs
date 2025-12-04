@@ -1,4 +1,4 @@
-use crate::utils::read_input;
+use crate::utils::*;
 
 pub fn run() {
     let input = read_input(3);
@@ -100,12 +100,12 @@ mod tests {
     #[test]
     fn test_part1() {
         let example = read_test_input(3);
-        assert_eq!(part1(example), 357u128);
+        assert_eq!(part1(&example), 357u128);
     }
 
     #[test]
     fn test_part2() {
         let example = read_test_input(3);
-        assert_eq!(part2(example), 3121910778619u128);
+        assert_eq!(part2(&example), 3121910778619u128);
     }
 }
