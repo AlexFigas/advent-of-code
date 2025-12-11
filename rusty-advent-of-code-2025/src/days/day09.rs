@@ -2,8 +2,7 @@ use crate::utils::*;
 
 pub fn run() {
     let input = read_input(9);
-    let sum = part1(&input);
-    println!("Part 1: {}", sum);
+    println!("Part 1: {}", part1(&input));
     println!("Part 2: {}", part2(&input));
 }
 
