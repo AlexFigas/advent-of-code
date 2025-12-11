@@ -18,6 +18,7 @@ fn main() {
         8 => days::day08::run(),
         9 => days::day09::run(),
         10 => days::day10::run(),
+        11 => days::day11::run(),
         _ => eprintln!("Usage: cargo run <day>"),
     }
 }

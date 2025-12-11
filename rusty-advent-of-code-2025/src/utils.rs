@@ -10,3 +10,9 @@ pub fn read_test_input(day: u8) -> String {
     fs::read_to_string(format!("inputs/day{:02}_test.txt", day))
         .expect("Failed to read test input file")
 }
+
+#[cfg(test)]
+pub fn read_test_input_part(day: u8, part: u8) -> String {
+    fs::read_to_string(format!("inputs/day{:02}_test{}.txt", day, part))
+        .expect("Failed to read test input file")
+}
